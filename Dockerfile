@@ -13,6 +13,9 @@ RUN pnpm run build
 
 FROM base as production
 
+ARG NODE_ENV=production
+ENV NODE_ENV=${NODE_ENV}
+
 WORKDIR /app
 
 COPY package*.json pnpm-lock.yaml .
@@ -20,4 +23,4 @@ RUN pnpm install -P --frozen-lockfile
 
 COPY --from=dependencies /app/dist ./dist
 
-CMD ["node", "dist/index.js"]
+CMD ["node", "dist/server.js"]
