@@ -5,7 +5,7 @@ RUN corepack prepare pnpm@latest --activate
 FROM base as dependencies
 WORKDIR /app
 
-COPY package*.json pnpm-lock.yaml .
+COPY package*.json pnpm-lock.yaml ./
 RUN pnpm install
 
 COPY . .
@@ -18,7 +18,7 @@ ENV NODE_ENV=${NODE_ENV}
 
 WORKDIR /app
 
-COPY package*.json pnpm-lock.yaml .
+COPY package*.json pnpm-lock.yaml ./
 RUN pnpm install -P --frozen-lockfile
 
 COPY --from=dependencies /app/dist ./dist
